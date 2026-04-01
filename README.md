@@ -3,21 +3,31 @@
 [![CI](https://github.com/JordanCoin/sockd/actions/workflows/ci.yml/badge.svg)](https://github.com/JordanCoin/sockd/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE-MIT)
 
-Local-first daemon infrastructure for AI tools and agents.
+Daemon infrastructure for local-first AI tools.
 
-Your CLI stays short-lived. Your daemon keeps warm state in memory.
-sockd handles everything in between.
+sockd turns any CLI into a stateful local service.
+
+LLM tools are stateless by default. Every hook, every agent call, every CLI
+invocation pays the same startup tax: load the project graph, parse the index,
+rebuild the cache. That's why they're slow, expensive, and repetitive.
+
+sockd gives them memory. From 50ms to 40us by keeping state warm.
+
+```
+CLI / hook / agent
+       |
+    sockd client (connects or auto-starts daemon)
+       |
+    daemon process (warm state in memory)
+       |
+    your logic (instant response)
+```
 
 ```
 codemap → structure code
 docmap  → structure docs
 sockd   → keep state warm, move context between tools
 ```
-
-Every AI tool that needs persistent state (project graphs, indexes, caches,
-model context) pays the same startup tax on every invocation. sockd eliminates
-that by managing the daemon lifecycle so your tool feels like a fast local
-service while staying a normal CLI.
 
 sockd owns sockets, PID files, auto-start, readiness probing, signal handling,
 idle shutdown, and framed request/response transport.
