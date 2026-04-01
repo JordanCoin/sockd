@@ -15,7 +15,9 @@ impl PidGuard {
 
         for _ in 0..3 {
             if path.exists() {
-                if let Some(pid) = read_pid(path)? && is_process_alive(pid) {
+                if let Some(pid) = read_pid(path)?
+                    && is_process_alive(pid)
+                {
                     return Err(Error::DaemonAlreadyRunning {
                         pid: Some(pid),
                         socket: None,
