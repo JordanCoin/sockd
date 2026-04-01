@@ -3,33 +3,26 @@
 [![CI](https://github.com/JordanCoin/sockd/actions/workflows/ci.yml/badge.svg)](https://github.com/JordanCoin/sockd/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE-MIT)
 
-Local daemon infrastructure for tools with expensive startup.
+Local-first daemon infrastructure for AI tools and agents.
 
-`sockd` lets a normal CLI command behave like a fast local service.
-Your client stays short-lived. Your daemon keeps warm state in memory.
-`sockd` handles the daemon plumbing in between.
+Your CLI stays short-lived. Your daemon keeps warm state in memory.
+sockd handles everything in between.
 
-Use it when your tool is slow because every invocation has to load the
-same expensive state again.
-
-```text
-short-lived CLI / hook / plugin
-              ->
-          sockd client
-              ->
-    local daemon process with warm state
-              ->
-      your actual application logic
+```
+codemap → structure code
+docmap  → structure docs
+sockd   → keep state warm, move context between tools
 ```
 
-In a few words: it is the reusable local daemon layer under your tool.
+Every AI tool that needs persistent state (project graphs, indexes, caches,
+model context) pays the same startup tax on every invocation. sockd eliminates
+that by managing the daemon lifecycle so your tool feels like a fast local
+service while staying a normal CLI.
 
-`sockd` owns sockets, pid files, auto-start, readiness, graceful shutdown,
-and idle shutdown.
+sockd owns sockets, PID files, auto-start, readiness probing, signal handling,
+idle shutdown, and framed request/response transport.
 
-You own your app logic, your state, and your request format.
-
-It is not a web server, not a remote service, and not your business logic.
+You own your state, your logic, and your protocol.
 
 ## Quickstart
 
