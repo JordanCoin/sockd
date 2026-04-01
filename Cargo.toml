@@ -1,0 +1,21 @@
+[package]
+name = "sockd"
+version = "0.1.0"
+edition = "2024"
+description = "Managed Unix IPC daemon lifecycle: sockets, PID files, auto-start, idle shutdown, signal handling"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/JordanCoin/sockd"
+homepage = "https://github.com/JordanCoin/sockd"
+keywords = ["unix", "ipc", "daemon", "socket", "process"]
+categories = ["os::unix-apis", "network-programming"]
+readme = "README.md"
+
+[lib]
+crate-type = ["rlib", "staticlib", "cdylib"]
+
+[dependencies]
+libc = "0.2"
+signal-hook = "0.3"
+
+[dev-dependencies]
+tempfile = "3"

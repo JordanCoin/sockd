@@ -1,0 +1,5 @@
+module CSockd {
+    header "sockd.h"
+    link "sockd"
+    export *
+}
