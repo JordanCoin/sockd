@@ -15,12 +15,14 @@ sockd gives them memory. From 50ms to 40us by keeping state warm.
 
 ```
 CLI / hook / agent
-       |
-    sockd client (connects or auto-starts daemon)
-       |
-    daemon process (warm state in memory)
-       |
-    your logic (instant response)
+        |
+   sockd client
+(connect or auto-start)
+        |
+   sockd daemon
+ (warm state in memory)
+        |
+    your logic
 ```
 
 ```
@@ -92,8 +94,11 @@ let stopped = Client::new("/tmp/mytool.sock")
 
 Every developer tool that needs a persistent daemon reimplements the same 6 things:
 PID files, Unix sockets, auto-start from client, idle timeout, signal handling,
-and a request/response protocol. Gradle, Docker, gopls, Buck2, Redis -- they all
-do this. None of them extracted it into a library.
+and a request/response protocol.
+
+Gradle, Docker, gopls, Buck2, Redis -- they all do this.
+
+**None of them extracted it into a reusable library.**
 
 sockd is that library.
 
