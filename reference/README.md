@@ -5,15 +5,14 @@ It is not compiled into the Rust library. It exists here for:
 
 - **Learning** — heavily commented, written as a C teaching exercise
 - **Proof of concept** — demonstrates the daemon pattern works in pure C
-- **Benchmarking** — includes a harness that measures 40us query latency
+- **Benchmarking** — measured 40us query latency vs 50ms for Node.js
 
 ## Files
 
 - `protocol.h` — binary frame format (shared between daemon and client)
 - `router-daemon.c` — persistent daemon with mmap'd state, Unix socket, signal handling
 - `router-client.c` — thin client that translates JSON (from Claude Code hooks) to binary protocol
-- `bench-harness.c` — nanosecond-precision benchmark with daemon lifecycle management
-- `Makefile` — builds everything
+- `Makefile` — builds both binaries
 
 ## Build and run
 
