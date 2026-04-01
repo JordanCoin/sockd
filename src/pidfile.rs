@@ -15,13 +15,11 @@ impl PidGuard {
 
         for _ in 0..3 {
             if path.exists() {
-                if let Some(pid) = read_pid(path)? {
-                    if is_process_alive(pid) {
-                        return Err(Error::DaemonAlreadyRunning {
-                            pid: Some(pid),
-                            socket: None,
-                        });
-                    }
+                if let Some(pid) = read_pid(path)? && is_process_alive(pid) {
+                    return Err(Error::DaemonAlreadyRunning {
+                        pid: Some(pid),
+                        socket: None,
+                    });
                 }
                 remove_if_exists(path)?;
             }
@@ -72,10 +70,7 @@ pub(crate) fn is_process_alive(pid: u32) -> bool {
         return true;
     }
 
-    match io::Error::last_os_error().raw_os_error() {
-        Some(libc::EPERM) => true,
-        _ => false,
-    }
+    matches!(io::Error::last_os_error().raw_os_error(), Some(libc::EPERM))
 }
 
 fn remove_if_exists(path: &Path) -> Result<()> {

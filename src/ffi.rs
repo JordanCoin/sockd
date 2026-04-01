@@ -310,10 +310,7 @@ fn c_string_vec(
     let argv = slice_from_raw_parts(argv, argc);
     let mut out = Vec::with_capacity(argc);
     for arg in argv {
-        let Some(value) = c_string_result(*arg, error_out) else {
-            return None;
-        };
-        out.push(value);
+        out.push(c_string_result(*arg, error_out)?);
     }
     Some(out)
 }
