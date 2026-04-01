@@ -107,34 +107,25 @@ Docs:
 - [docs/LIFECYCLE.md](docs/LIFECYCLE.md) -- Startup, shutdown, stale recovery, auto-start behavior
 - [docs/PROTOCOL.md](docs/PROTOCOL.md) -- Wire format for writing raw-socket clients in any language
 
-## Installation
+## Install
 
-### Rust consumers
-
-This is the intended primary integration:
-
+**Rust:**
 ```bash
 cargo add sockd
 ```
 
-Then build your own daemon binary and thin client/CLI on top of the crate.
-
-### C / FFI consumers
-
-Build or download the library artifacts:
-
+**Everything else** (Python, Swift, Go, C, Node):
 ```bash
-cargo build --release
+# macOS (Apple Silicon)
+curl -sL https://github.com/JordanCoin/sockd/releases/latest/download/sockd-aarch64-apple-darwin.tar.gz | tar xz -C /usr/local/lib
+# macOS (Intel)
+curl -sL https://github.com/JordanCoin/sockd/releases/latest/download/sockd-x86_64-apple-darwin.tar.gz | tar xz -C /usr/local/lib
+# Linux (x86_64)
+curl -sL https://github.com/JordanCoin/sockd/releases/latest/download/sockd-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/lib
 ```
 
-This repo emits:
-- `target/release/libsockd.a`
-- `target/release/libsockd.so` on Linux
-- `target/release/libsockd.dylib` on macOS
-
-The C header is at [include/sockd.h](include/sockd.h).
-Swift consumers can also use the shipped module map at
-[include/module.modulemap](include/module.modulemap) and `import CSockd`.
+This gives you `libsockd.dylib` (or `.so`), `libsockd.a`, `sockd.h`, and `module.modulemap`.
+Link against the library and include the header. See [examples/](examples/) for Python, Swift, and Rust clients.
 
 ## Cross-Language Use
 
