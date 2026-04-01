@@ -1,6 +1,6 @@
 [package]
 name = "sockd"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2024"
 description = "Managed Unix IPC daemon lifecycle: sockets, PID files, auto-start, idle shutdown, signal handling"
 license = "MIT OR Apache-2.0"
