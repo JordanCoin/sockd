@@ -1,6 +1,7 @@
 # sockd
 
 [![CI](https://github.com/JordanCoin/sockd/actions/workflows/ci.yml/badge.svg)](https://github.com/JordanCoin/sockd/actions)
+[![Rust](https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE-MIT)
 
 Daemon infrastructure for local-first AI tools.
