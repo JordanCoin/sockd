@@ -166,7 +166,7 @@ The daemon lifecycle code (PID management, signal handling, idle timeout, auto-s
 was the hardest part to get right -- and it had nothing to do with the routing logic.
 That's when we realized: this should be a library.
 
-Reference implementation: [ios-skills-collection/bench/daemon/](https://github.com/JordanCoin/ios-skills-collection/tree/main/bench/daemon)
+C reference implementation: [reference/](reference/) — the original C daemon this library was extracted from
 
 ## Contributing
 
